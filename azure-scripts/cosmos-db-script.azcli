@@ -28,9 +28,22 @@ az cosmosdb create \
     --default-consistency-level Eventual \
     --kind GlobalDocumentDB
 
+az cosmosdb list-keys \
+    --resource-group ${RESOURCE_GROUP} \
+    --name ${RESOURCE_PREFIX}-cosmos-acc
+
 az cosmosdb database create \
     --resource-group ${RESOURCE_GROUP} \
-    --name ${RESOURCE_PREFIX}-cosmos-db \
+    --name ${RESOURCE_PREFIX}-cosmos-acc \
+    --db-name ${RESOURCE_PREFIX}-cosmos-db
+
+az cosmosdb collection create \
+    --collection-name ambient-metrics \
+    --resource-group ${RESOURCE_GROUP} \
+    --db-name ${RESOURCE_PREFIX}-cosmos-db \
+    --name ${RESOURCE_PREFIX}-cosmos-acc \
+    --throughput 400
+
 
 # CLEAR RESOURCES   
 

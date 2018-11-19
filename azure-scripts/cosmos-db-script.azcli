@@ -1,0 +1,41 @@
+az login;
+
+LOCATION=westeurope
+RESOURCE_PREFIX=cs-arch-db-hmk
+RESOURCE_PREFIX_NH=csarchdbhmk
+RESOURCE_GROUP=${RESOURCE_PREFIX}-rg
+
+az group create --location ${LOCATION} \
+    --name ${RESOURCE_GROUP};
+
+# STORAGE & QUEUE
+
+az storage account create --name ${RESOURCE_PREFIX_NH}storage \
+    --resource-group ${RESOURCE_GROUP} \
+    --sku Standard_LRS;
+
+az storage queue create --name ${RESOURCE_PREFIX}-queue-001 \
+    --account-name ${RESOURCE_PREFIX_NH}storage;
+
+az storage queue create --name ${RESOURCE_PREFIX}-queue-002 \
+    --account-name ${RESOURCE_PREFIX_NH}storage;
+
+# DATABASE
+
+az cosmosdb create \
+    --resource-group ${RESOURCE_GROUP} \
+    --name ${RESOURCE_PREFIX}-cosmos-acc \
+    --default-consistency-level Eventual \
+    --kind GlobalDocumentDB
+
+az cosmosdb database create \
+    --resource-group ${RESOURCE_GROUP} \
+    --name ${RESOURCE_PREFIX}-cosmos-db \
+
+# CLEAR RESOURCES   
+
+az group delete --name ${RESOURCE_GROUP} \
+    --no-wait \
+    --yes;
+
+az group exists --name ${RESOURCE_GROUP};

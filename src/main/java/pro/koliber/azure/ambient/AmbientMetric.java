@@ -1,8 +1,10 @@
 package pro.koliber.azure.ambient;
 
-public class AmbientMetric {
+import java.io.Serializable;
 
-    private Long id = 0L;
+public class AmbientMetric implements Serializable {
+
+    private String id;
 
     private String deviceId;
 
@@ -14,11 +16,11 @@ public class AmbientMetric {
 
     private String humidity;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -65,7 +67,7 @@ public class AmbientMetric {
     @Override
     public String toString() {
         return "AmbientMetric{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", deviceId='" + deviceId + '\'' +
                 ", metricDatetime='" + metricDatetime + '\'' +
                 ", temperature='" + temperature + '\'' +

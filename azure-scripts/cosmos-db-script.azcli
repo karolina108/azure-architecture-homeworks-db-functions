@@ -44,6 +44,13 @@ az cosmosdb collection create \
     --name ${RESOURCE_PREFIX}-cosmos-acc \
     --throughput 400
 
+az cosmosdb collection create \
+    --collection-name leases \
+    --resource-group ${RESOURCE_GROUP} \
+    --db-name ${RESOURCE_PREFIX}-cosmos-db \
+    --name ${RESOURCE_PREFIX}-cosmos-acc \
+    --throughput 400
+
 
 # CLEAR RESOURCES   
 

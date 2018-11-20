@@ -2,6 +2,7 @@ package pro.koliber.azure.ambient;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class AmbientMetricGenerator {
@@ -9,6 +10,9 @@ public class AmbientMetricGenerator {
     public static AmbientMetric generateMetric(){
 
         AmbientMetric ambientMetric = new AmbientMetric();
+
+        ambientMetric
+                .setId(generateAmbientMetric());
 
         ambientMetric
                 .setDeviceId(generateDeviceId());
@@ -26,6 +30,10 @@ public class AmbientMetricGenerator {
                 .setHumidity(generateHumidity());
 
         return ambientMetric;
+    }
+
+    private static String generateAmbientMetric(){
+        return UUID.randomUUID().toString();
     }
 
     private static String generateDeviceId() {
